@@ -1,0 +1,366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-primary text-light-primary dark:bg-dark-primary dark:text-light-primary transition-colors duration-300;
+  }
+  
+  /* Global default: Hide scrollbar */
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}
+
+@layer components {
+  .nav-icon {
+    @apply w-10 h-10 rounded-full flex items-center justify-center 
+           bg-dark-tertiary text-light-primary cursor-pointer 
+           hover:bg-dark-secondary transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white font-semibold px-4 py-2 
+           rounded-lg hover:bg-blue-600 transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-dark-secondary rounded-xl p-4 shadow-lg;
+  }
+}
+
+/* =========================================
+   LIGHT MODE OVERRIDES
+   (This makes white mode look good)
+   ========================================= */
+html:not(.dark) .bg-dark-secondary {
+  background-color: #ffffff !important;
+  color: #050505 !important;
+}
+
+html:not(.dark) .bg-dark-primary {
+  background-color: #f0f2f5 !important;
+}
+
+html:not(.dark) .text-light-primary {
+  color: #050505 !important;
+}
+
+html:not(.dark) .text-light-secondary {
+  color: #65676b !important;
+}
+
+html:not(.dark) .bg-dark-tertiary {
+  background-color: #e4e6eb !important;
+}
+
+html:not(.dark) .border-dark-tertiary {
+  border-color: #dadde1 !important;
+}
+
+html:not(.dark) .navbar {
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+html:not(.dark) .sidebar {
+  background-color: #ffffff;
+  border-right: 1px solid #dadde1;
+}
+
+html:not(.dark) .post-card,
+html:not(.dark) .create-post-box {
+  background-color: #ffffff;
+  color: #050505;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+html:not(.dark) input,
+html:not(.dark) textarea {
+  color: #050505;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #65676b;
+}
+
+/* =========================================
+   SCROLLBAR SETTINGS
+   ========================================= */
+
+/* 1. Home Page: Transparent until Hover */
+main {
+    /* Force main to be the scrolling container so it doesn't push the window */
+    height: calc(100vh - 3.5rem) !important;
+    overflow-y: auto !important;
+}
+
+main::-webkit-scrollbar {
+    width: 10px; /* Must have width to register a hover */
+}
+
+main::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Default: Invisible thumb */
+main::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    border-radius: 10px;
+}
+
+/* Show thumb ONLY when hovering over the main area */
+main:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(136, 136, 136, 0.5) !important;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(85, 85, 85, 0.7) !important;
+}
+
+/* Dark mode support */
+.dark main:hover::-webkit-scrollbar-thumb {
+    background: rgba(78, 79, 80, 0.5) !important;
+}
+
+.dark main::-webkit-scrollbar-thumb:hover {
+    background: rgba(101, 103, 107, 0.7) !important;
+}
+
+/* 2. Reels: Hide Scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+/* =========================================
+   AUTH PAGES (Login/Register)
+   ========================================= */
+.auth-page {
+  @apply flex justify-center items-center min-h-[calc(100vh-3.5rem)] px-4;
+}
+
+.auth-form {
+  @apply w-full max-w-md bg-dark-secondary p-8 rounded-xl shadow-xl border border-dark-tertiary;
+}
+
+.auth-form h2 {
+  @apply text-2xl font-bold text-light-primary mb-2 text-center;
+}
+
+.auth-form p {
+  @apply text-light-secondary text-sm text-center mt-4;
+}
+
+.auth-form a {
+  @apply text-primary hover:underline font-medium;
+}
+
+.auth-form input {
+  @apply w-full p-3 mb-3 bg-dark-tertiary text-light-primary placeholder-gray-500 rounded-lg border border-transparent focus:border-primary focus:bg-dark-primary outline-none transition-all;
+}
+
+.auth-form button {
+  @apply w-full mt-4 bg-primary text-white py-3 rounded-lg font-bold hover:bg-blue-600 transition-colors;
+}
+
+.auth-form .error {
+  @apply bg-red-500/10 border border-red-500 text-red-500 p-3 rounded-lg mb-4 text-center text-sm;
+}
+
+/* =========================================
+   PROFILE PAGE
+   ========================================= */
+.profile-page {
+  @apply max-w-2xl mx-auto px-4 py-6;
+}
+
+.profile-header {
+  @apply bg-dark-secondary rounded-xl p-6 mb-6 text-center shadow-lg border border-dark-tertiary flex flex-col items-center;
+}
+
+.profile-header .avatar {
+  @apply w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg;
+}
+
+.profile-header .profile-info {
+  @apply text-center;
+}
+
+.profile-header h2 {
+  @apply text-2xl font-bold text-light-primary mb-1;
+}
+
+.profile-header p {
+  @apply text-light-secondary;
+}
+
+.profile-header .bio {
+  @apply text-light-primary mt-2 italic;
+}
+
+.profile-posts h3 {
+  @apply text-lg font-bold text-light-primary mb-4 ml-1;
+}
+
+.profile-posts .empty {
+  @apply text-center py-8 text-light-secondary bg-dark-secondary rounded-xl border border-dark-tertiary;
+}
+
+/* Profile post cards (reuse PostCard styles) */
+.profile-posts .post-card {
+  @apply bg-dark-secondary rounded-xl p-4 mb-4 shadow-lg border border-dark-tertiary;
+}
+
+.profile-posts .post-card p {
+  @apply text-light-primary mb-2;
+}
+
+.profile-posts .post-card small {
+  @apply text-light-secondary text-xs;
+}
+
+.profile-posts .post-stats {
+  @apply flex gap-4 mt-3 pt-3 border-t border-dark-tertiary text-light-secondary text-sm;
+}
+
+/* =========================================
+   LIGHT MODE OVERRIDES FOR AUTH/PROFILE
+   ========================================= */
+html:not(.dark) .auth-form,
+html:not(.dark) .profile-header,
+html:not(.dark) .profile-posts .post-card {
+  @apply bg-white border-gray-200 shadow-md;
+}
+
+html:not(.dark) .auth-form input,
+html:not(.dark) .profile-posts .post-card p {
+  @apply text-gray-900;
+}
+
+html:not(.dark) .auth-form h2,
+html:not(.dark) .profile-header h2,
+html:not(.dark) .profile-posts h3 {
+  @apply text-gray-900;
+}
+
+html:not(.dark) .auth-form p,
+html:not(.dark) .profile-header p,
+html:not(.dark) .profile-posts .post-card small {
+  @apply text-gray-600;
+}
+
+/* =========================================
+   SIDEBAR SCROLLBAR FIX (Overrides Global)
+   ========================================= */
+.sidebar {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    /* Firefox support */
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+/* Force width to override global 0px rule */
+.sidebar::-webkit-scrollbar {
+    width: 8px !important;
+    background: transparent !important;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+/* Thumb is transparent by default (invisible) */
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Show thumb only on hover */
+.sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(136, 136, 136, 0.5) !important;
+}
+
+/* Dark mode hover */
+.dark .sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(101, 103, 107, 0.7) !important;
+}
+
+
+/* =========================================
+   SIDEBAR SCROLLBAR - Transparent Until Hover
+   ========================================= */
+.sidebar,
+aside.sidebar {
+    height: calc(100vh - 3.5rem) !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: transparent transparent !important; /* Firefox: transparent by default */
+}
+
+/* Chrome/Safari/Edge */
+.sidebar::-webkit-scrollbar,
+aside.sidebar::-webkit-scrollbar {
+    width: 8px !important;
+    background: transparent !important;
+}
+
+.sidebar::-webkit-scrollbar-track,
+aside.sidebar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+/* Default: Completely transparent (invisible) */
+.sidebar::-webkit-scrollbar-thumb,
+aside.sidebar::-webkit-scrollbar-thumb {
+    background: transparent !important;
+    border-radius: 6px !important;
+    transition: background 0.3s ease !important;
+}
+
+/* SHOW on hover */
+.sidebar:hover::-webkit-scrollbar-thumb,
+aside.sidebar:hover::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.5) !important;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+aside.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(136, 136, 136, 0.8) !important;
+}
+
+/* Firefox hover support */
+.sidebar:hover,
+aside.sidebar:hover {
+    scrollbar-color: rgba(136, 136, 136, 0.5) transparent !important;
+}
+
+/* Dark mode */
+.dark .sidebar,
+.dark aside.sidebar {
+    scrollbar-color: transparent transparent !important;
+}
+
+.dark .sidebar:hover::-webkit-scrollbar-thumb,
+.dark aside.sidebar:hover::-webkit-scrollbar-thumb {
+    background: rgba(101, 103, 107, 0.7) !important;
+}
+
+.dark .sidebar::-webkit-scrollbar-thumb:hover,
+.dark aside.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(101, 103, 107, 1) !important;
+}
+
+.dark .sidebar:hover,
+.dark aside.sidebar:hover {
+    scrollbar-color: rgba(101, 103, 107, 0.7) transparent !important;
+}
