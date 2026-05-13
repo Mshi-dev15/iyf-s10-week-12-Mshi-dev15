@@ -122,23 +122,33 @@ router.post('/:id/like', protect, async (req, res) => {
             return res.status(404).json({ error: 'Post not found' });
         }
 
-        const alreadyLiked = post.likes.includes(req.user._id);
+        // Compare as strings for reliable matching
+        const userIdStr = req.user._id.toString();
+        const alreadyLiked = post.likes?.some(likeId => 
+            likeId?.toString() === userIdStr
+        );
 
         if (alreadyLiked) {
-            // Unlike
-            post.likes = post.likes.filter(
-                id => id.toString() !== req.user._id.toString()
+            // Unlike: filter out this user's like
+            post.likes = post.likes.filter(likeId => 
+                likeId?.toString() !== userIdStr
             );
         } else {
-            // Like
+            // Like: add user's ObjectId
+            if (!Array.isArray(post.likes)) post.likes = [];
             post.likes.push(req.user._id);
         }
 
         await post.save();
 
-        res.json({ likes: post.likes.length, liked: !alreadyLiked });
+        // Return simple likeCount as NUMBER (frontend expects this)
+        res.json({ 
+            success: true, 
+            likeCount: post.likes?.length || 0 
+        });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error('Like error:', error);
+        res.status(500).json({ error: 'Server error' });
     }
 });
 

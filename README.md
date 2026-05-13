@@ -11,28 +11,11 @@
   <a href="https://mongodb.com" target="_blank">
     <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
   </a>
-  <a href="https://tailwindcss.com" target="_blank">
-    <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  </a>
   <a href="https://vitejs.dev" target="_blank">
     <img src="https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
   </a>
 </p>
 
-<p align="center">
-  <a href="https://vercel.com" target="_blank">
-    <img src="https://img.shields.io/badge/Deployed_on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
-  </a>
-  <a href="https://render.com" target="_blank">
-    <img src="https://img.shields.io/badge/Backend_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Render" />
-  </a>
-  <a href="https://github.com/Mshi-dev15/iyf-s10-week-12-Mshi-dev15/blob/main/LICENSE" target="_blank">
-    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License" />
-  </a>
-  <a href="https://github.com/Mshi-dev15/iyf-s10-week-12-Mshi-dev15" target="_blank">
-    <img src="https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge" alt="Version" />
-  </a>
-</p>
 
 <p align="center">
   <a href="https://convo-app-murex.vercel.app" target="_blank">
@@ -128,30 +111,30 @@ cd backend
 npm install
 ```
 
-# 3. Create backend .env file
+### 3. Create backend .env file
 ```bash
 cp .env.example .env
 # Edit .env with your MongoDB URI and JWT_SECRET
 ```
 
-# 4. Start backend server
+### 4. Start backend server
 ```bash
 npm start
 # Server runs on http://localhost:3000
 ```
 
-# 5. Install frontend dependencies (in new terminal)
+### 5. Install frontend dependencies (in new terminal)
 ```bash
 cd ../frontend
 npm install
 ```
 
-# 6. Create frontend .env file
+### 6. Create frontend .env file
 ```bash
 echo "VITE_API_URL=http://localhost:3000/api" > .env
 ```
 
-# 7. Start frontend dev server
+### 7. Start frontend dev server
 ```bash
 npm run dev
 # App runs on http://localhost:5173
