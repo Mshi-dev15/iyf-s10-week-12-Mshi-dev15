@@ -8,25 +8,23 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Reels from './pages/Reels';
+import Marketplace from './pages/Marketplace';
 import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuth(); // ✅ Only get what we need
     const [theme, setTheme] = useState('dark');
 
     useEffect(() => {
-        // Apply theme to html element
         const root = document.documentElement;
         if (theme === 'dark') {
             root.classList.add('dark');
         } else {
             root.classList.remove('dark');
         }
-        // Save preference
         localStorage.setItem('theme', theme);
     }, [theme]);
 
-    // Load saved theme on mount
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         setTheme(savedTheme);
@@ -54,6 +52,12 @@ export default function App() {
                             <Route path="/reels" element={
                                 <ProtectedRoute>
                                     <Reels />
+                                </ProtectedRoute>
+                            } />
+                            {/* ✅ Marketplace Route - No user prop passed */}
+                            <Route path="/marketplace" element={
+                                <ProtectedRoute>
+                                    <Marketplace />
                                 </ProtectedRoute>
                             } />
                             <Route path="/profile/:id" element={
