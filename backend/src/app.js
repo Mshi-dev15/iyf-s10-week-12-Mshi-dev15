@@ -4,23 +4,30 @@ require('dotenv').config();
 
 const app = express();
 
-// CORS configuration
+// CORS configuration - UPDATED
 const corsOptions = {
     origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, curl, Postman)
+        if (!origin) return callback(null, true);
+        
         const allowedOrigins = [
             'http://localhost:5173',
             'http://localhost:3000',
-            process.env.FRONTEND_URL
-        ].filter(Boolean);
+            'https://convo-app-murex.vercel.app',              // Your custom Vercel URL
+            'https://convo-23ny1lsu4-mshi-dev15s-projects.vercel.app',  // Your Vercel preview URL (from error)
+            process.env.FRONTEND_URL                            // From Render env var (fallback)
+        ].filter(Boolean); // Remove undefined/null values
 
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Allow if origin matches any allowed origin OR ends with .vercel.app (for preview deployments)
+        if (allowedOrigins.includes(origin) || origin?.endsWith('.vercel.app')) {
             callback(null, true);
         } else {
+            console.warn(`🚫 CORS blocked: ${origin}`);
             callback(new Error('Not allowed by CORS'));
         }
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 };
 
